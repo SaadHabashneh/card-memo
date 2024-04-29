@@ -1,0 +1,10 @@
+.gameDiv {
+    background-image: url(../src/assets/game-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+

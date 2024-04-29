@@ -1,10 +1,12 @@
-import {React, useState} from 'react'
-import 'App.css'
+import {React, useState} from 'react';
+import './App.css';
 
 const GamePage = () => {
 
+
+
   return (
-    <div>
+    <div className='gameDiv'>
 
     </div>
   )
