@@ -1,6 +1,8 @@
 .gameDiv {
+    height: 100%;
+    width: 100%;
     background-image: url(../src/assets/game-bg.jpg);
-    background-size: cover;
+    background-size: auto;
     background-repeat: no-repeat;
     display: flex;
     flex-wrap: wrap;
@@ -8,3 +10,7 @@
     align-items: center;
 }
 
+.cards {
+    padding: 0.5rem;
+
+}
