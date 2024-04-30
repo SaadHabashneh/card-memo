@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 const GamePage = () => {
@@ -21,10 +21,42 @@ const GamePage = () => {
 
   useEffect(cardGen, []);
 
+  let val1 = "";
+  let val2 = "";
+  let open = 0;
+  let score = 8;
+  let hearts = 5;
+  const check = (e) => {
+    if (open == 1) {
+        val2 += e.target.value;
+    }
+    open++;
+    e.target.innerText = e.target.value;
+    val1 += e.target.value;
+    if (val1 == val2) {
+        score--;
+    }
+    else {
+        hearts--;
+    }
+    if (open == 2) {
+        e.target.innerText = "";
+        open = 0;
+    }
+  }
+
+  if (hearts == 0) {
+    window.alert("Failed :(");
+  }
+
+  if (score == 0) {
+    window.alert("Success!");
+  }
+
   return (
     <div className="gameDiv">
       {cards && (cards.map(card => (
-        <button key={card.id} value={card.value} className="cards"></button>
+        <button key={card.id} value={card.value} onClick={check} className="cards"></button>
       )))}
     </div>
   );
