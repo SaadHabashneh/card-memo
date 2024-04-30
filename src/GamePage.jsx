@@ -24,7 +24,7 @@ const GamePage = () => {
   return (
     <div className="gameDiv">
       {cards && (cards.map(card => (
-        <button key={card.id} value={card.value} className="cards">card {card.id}</button>
+        <button key={card.id} value={card.value} className="cards"></button>
       )))}
     </div>
   );
