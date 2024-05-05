@@ -1,21 +1,100 @@
-.gameDiv {
-    height: 100vh;
-    background-image: url(../src/assets/game-bg.jpg);
-    background-size: auto;
-    background-repeat: no-repeat;
-    display: grid;
-    grid-template-columns: 20% 20% 20% 20%;
-    grid-template-rows: 20% 20% 20% 20%;
-    justify-content: space-around;
-    justify-items: center;
+body {
+  font-family: "Trebuchet MS", sans-serif;
+  margin: 0;
+  color: white;
+  font-size: 1.25em;
+  background-color: #1b1523;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.cards {
-    padding: 5em;
-    margin-top: 20%;
-    border-radius: 1em;
+.cards-container {
+  width: 90%;
+  margin: 50px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 20px;
+  justify-items: center;
 }
 
-.cards:hover {
-    cursor: pointer;
+.card {
+  perspective: 1000px;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+}
+
+.card div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 1%;
+  transition: transform 0.6s;
+}
+
+.card.flipped div {
+  transform: rotateY(180deg);
+}
+
+.front {
+  transform: rotateY(180deg);
+  background: url("./back.jpeg") no-repeat center / cover;
+}
+
+.back {
+  background: #fff;
+}
+
+.back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.back,
+.front:hover {
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.modal-content h2 {
+  text-align: center;
+  color: #1b1523;
+}
+
+.modal-content button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  font-size: 18px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background-color: #45a049;
 }
