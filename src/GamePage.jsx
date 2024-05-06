@@ -1,15 +1,23 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import apple from "../public/apple.jpeg";
+import grape from "../public/grape.png";
+import lemon from "../public/lemon.jpeg";
+import orange from "../public/orange.png";
+import passion from "../public/passion.png";
+import pineapple from "../public/pineapple.jpeg";
+import strawberry from "../public/strawberry.png";
+import watermelon from "../public/watermelon.png";
 
 const cardImages = [
-  {"src": "./apple.jpeg", matched: false},
-  {"src": "./grape.jpeg", matched: false},
-  {"src": "./lemon.jpeg", matched: false},
-  {"src": "./orange.png", matched: false},
-  {"src": "./passion.png", matched: false},
-  {"src": "./pineapple.jpeg", matched: false},
-  {"src": "./strawberry.jpeg", matched: false},
-  {"src": "./watermelon.jpeg", matched: false}
+  {src: apple, matched: false},
+  {src: grape, matched: false},
+  {src: lemon, matched: false},
+  {src: orange, matched: false},
+  {src: passion, matched: false},
+  {src: pineapple, matched: false},
+  {src: strawberry, matched: false},
+  {src: watermelon, matched: false}
 ];
 
 const Modal = ({ message, onRestart }) => {
@@ -26,16 +34,17 @@ const Modal = ({ message, onRestart }) => {
 const GamePage = () => {
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
+  const [canFlip, setCanFlip] = useState(true);
   const [score, setScore] = useState(0);
-  const [hearts, setHearts] = useState(5);
+  const [hearts, setHearts] = useState(10);
   const [showModal, setShowModal] = useState(false);
 
   const restartGame = () => {
     setScore(0);
-    setHearts(5);
+    setHearts(10);
     setFlippedCards([]);
-    cardGen();
     setShowModal(false);
+    cardGen();
   };
 
   const cardGen = () => {
@@ -46,18 +55,25 @@ const GamePage = () => {
   useEffect(cardGen, []);
 
   const open = (id, src) => {
-    setFlippedCards([...flippedCards, {id, src}]);
+    if (!canFlip) return;
+    return setFlippedCards([...flippedCards, {id, src}]);
   };
 
   useEffect(() => {
     if (flippedCards.length === 2) {
+      setCanFlip(false);
       const [card1, card2] = flippedCards;
       if (card1.src === card2.src) {
         setScore(score + 1);
         setCards(cards.map(card => card.id === card1.id || card.id === card2.id ? {...card, matched: true} : card));
+        setCanFlip(true);
+        setFlippedCards([]);
       } else {
         setHearts(hearts - 1);
-        setTimeout(() => setFlippedCards([]), 1000);
+        setTimeout(() => {
+          setFlippedCards([]);
+          setCanFlip(true);
+        }, 1000);
       }
     }
   }, [flippedCards]);
@@ -77,14 +93,17 @@ const GamePage = () => {
   return (
     <>
       {showModal && <Modal message={hearts === 0 ? "You Failed :(" : "You Win!"} onRestart={restartGame} />}
+      <div className="hearts">
+        <h3>❤ {hearts}</h3>
+      </div>
       <div className="cards-container">
         {cards && (cards.map(card => {
           const isFlipped = flippedCards.some(fCard => fCard.id === card.id) || card.matched;
           return (
             <div key={card.id} className={`card ${isFlipped ? 'flipped' : ''}`}>
               <div>
-                <img className="front" src={card.src} alt="card-front"/>
-                <img className="back" src="./back.jpeg" onClick={() => open(card.id, card.src)} alt="card-back" />
+                <img className={`front ${isFlipped ? '' : 'hide'}`} src={card.src} />
+                <img className={`back ${isFlipped ? 'hide' : ''}`} src="./back.jpeg" onClick={() => open(card.id, card.src)} />
               </div>
             </div>
           )
