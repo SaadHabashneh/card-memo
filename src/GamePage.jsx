@@ -103,7 +103,7 @@ const GamePage = () => {
             <div key={card.id} className={`card ${isFlipped ? 'flipped' : ''}`}>
               <div>
                 <img className={`front ${isFlipped ? '' : 'hide'}`} src={card.src} />
-                <img className={`back ${isFlipped ? 'hide' : ''}`} src="./back.jpeg" onClick={() => open(card.id, card.src)} />
+                <img className={`back ${isFlipped ? 'hide' : ''}`} src="./back.jpg" onClick={() => open(card.id, card.src)} />
               </div>
             </div>
           )

@@ -3,7 +3,7 @@ body {
   margin: 0;
   color: white;
   font-size: 1.25em;
-  background-color: #1b1523;
+  background-color: #2a1717;
   height: 100vh;
 }
 
@@ -41,7 +41,7 @@ body {
 
 .front {
   transform: rotateY(0deg);
-  background: url("./back.jpeg") no-repeat center / cover;
+  background: url("./back.jpg") no-repeat center / cover;
 }
 
 .back {
