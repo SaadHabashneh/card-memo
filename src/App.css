@@ -7,6 +7,8 @@ body {
   height: 100vh;
 }
 
+/* GamePage */
+
 .hearts {
   position: fixed;
 }
@@ -123,3 +125,6 @@ body {
 .modal-content button:hover {
   background-color: #45a049;
 }
+
+/* LandingPage */
+
