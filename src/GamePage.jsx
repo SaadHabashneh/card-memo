@@ -92,7 +92,7 @@ const GamePage = () => {
 
   return (
     <>
-      {showModal && <Modal message={hearts === 0 ? "You Failed :(" : "You Win!"} onRestart={restartGame} />}
+      {showModal && <Modal message={hearts === 0 ? "You Lose :(" : "You Win!"} onRestart={restartGame} />}
       <div className="hearts">
         <h3>❤ {hearts}</h3>
       </div>
