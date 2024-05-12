@@ -27,7 +27,7 @@ const Register = () => {
             <input onChange={setPassword((e) => e.target.value)} type="password" placeholder="password..."/><br/>
             <button onClick={registerHandler}>Register</button><br/>
             {message && <div className="">
-                <p className="regMsg"></p>
+                <p className="form-msg"></p>
             </div>}
         </div>
     </div>
