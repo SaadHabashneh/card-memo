@@ -1,4 +1,5 @@
 const mysql = require("mysql2/promise");
+const fs = require("fs");
 
 const pool = mysql.createPool({
     host: 'localhost',
@@ -14,5 +15,15 @@ pool.getConnection((err, connection) => {
     console.log('Database is connected');
     connection.release();
 });
+
+const sql = fs.readFileSync('./models/database.sql').toString();
+
+// pool.execute(sql)
+//     .then(() => {
+//         console.log('SQL script performed successfully');
+//     })
+//     .catch((err) => {
+//         console.error('Error executing the SQL script:', err);
+//     });
 
 module.exports = pool;
