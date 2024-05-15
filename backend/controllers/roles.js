@@ -2,10 +2,9 @@ const pool = require("../models/db");
 
 const createRole = (req, res) => {
   const { role } = req.body;
-  const query = `INSERT INTO roles (role) VALUES (${role});`;
+  const query = `INSERT INTO roles (role) VALUES (?);`;
   pool
-    .promise()
-    .query(query)
+    .query(query, [role])
     .then((result) => {
       res.status(201).json({
         success: true,
