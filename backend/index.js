@@ -14,7 +14,9 @@ app.use("/roles", rolesRouter);
 const usersRouter = require("./routes/users");
 app.use("/users", usersRouter);
 
-
+// permissions router
+const permissionsRouter = require("./routes/permissions");
+app.use("/permissions", permissionsRouter);
 
 app.listen(PORT, () => {
     console.log(`server is listening at localhost://${PORT}`);

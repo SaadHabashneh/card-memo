@@ -13,7 +13,7 @@ const register = async (req, res) => {
       res.status(201).json({
         success: true,
         message: "User created successfully",
-        user: result.rows,
+        user: result[0],
       });
     })
     .catch((err) => {

@@ -1,16 +1,16 @@
 const pool = require("../models/db");
 
-const createRole = (req, res) => {
-  const { role } = req.body;
-  const query = `INSERT INTO roles (role) VALUES (?);`;
-  const data = [role];
+const addPermission = (req, res) => {
+  const { permission } = req.body;
+  const query = `INSERT INTO permissions (permission) VALUES ?`;
+  const data = [permission];
   pool
     .query(query, data)
     .then((result) => {
       res.status(201).json({
         success: true,
-        message: "role created successfully",
-        role: result[0],
+        message: "Permission added successfully",
+        permission: result[0],
       });
     })
     .catch((err) => {
@@ -23,5 +23,5 @@ const createRole = (req, res) => {
 };
 
 module.exports = {
-  createRole,
+  addPermission,
 };
