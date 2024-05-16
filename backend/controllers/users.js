@@ -52,7 +52,7 @@ const deleteUserById = (req, res) => {
   pool
     .query(query, data)
     .then((result) => {
-      res.status(200).json({
+      res.status(201).json({
         success: true,
         message: "User deleted successfully",
       });
@@ -86,9 +86,31 @@ const viewDeletedUsers = (req, res) => {
     });
 };
 
+const reinstateUserById = (req, res) => {
+  const { id } = req.params;
+  const query = `UPDATE users SET is_deleted = 0 WHERE id = ?;`;
+  const data = [id];
+  pool
+    .query(query, data)
+    .then((result) => {
+      res.status(201).json({
+        success: true,
+        message: "User reinstated successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        error: err.message,
+      });
+    });
+};
+
 module.exports = {
   register,
   getUsers,
   deleteUserById,
   viewDeletedUsers,
+  reinstateUserById,
 };
