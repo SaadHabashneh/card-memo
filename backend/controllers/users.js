@@ -45,7 +45,28 @@ const getUsers = (req, res) => {
     });
 };
 
+const deleteUserById = (req, res) => {
+  const { id } = req.params;
+  const query = `UPDATE users SET is_deleted = 1 WHERE id = ?;`;
+  const data = [id];
+  pool.query(query, data)
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        message: "User deleted successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        error: err.message,
+      });
+    });
+};
+
 module.exports = {
   register,
   getUsers,
+  deleteUserById,
 };
