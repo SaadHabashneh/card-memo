@@ -2,11 +2,11 @@ const pool = require("../models/db");
 const bcrypt = require("bcrypt");
 
 const register = async (req, res) => {
-  const { name, email, password, role_id } = req.body;
+  const { username, email, password, role_id } = req.body;
   const hashedPass = await bcrypt.hash(password, 10);
   const query =
-    "INSERT INTO users (name, email, password, role_id) VALUES (?, ?, ?, ?);";
-  const data = [name, email.toLowerCase(), hashedPass, role_id];
+    "INSERT INTO users (username, email, password, role_id) VALUES (?, ?, ?, ?);";
+  const data = [username, email.toLowerCase(), hashedPass, role_id];
   pool
     .query(query, data)
     .then((result) => {
