@@ -22,6 +22,24 @@ const addScore = (req, res) => {
     });
 };
 
+const getAllScores = (req, res) => {
+    const query = `SELECT (username), (score) FROM users JOIN scores WHERE users.id = scores.user_id;`;
+    pool.query(query).then((result) => {
+        res.status(200).json({
+            success: true,
+            message: "All scores",
+            scores: result[0]
+        });
+    }).catch((err) => {
+        res.status(500).json({
+            success: false,
+            message: "Server error",
+            error: err.message
+        });
+    });
+};
+
 module.exports = {
   addScore,
+  getAllScores,
 };
