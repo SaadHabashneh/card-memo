@@ -18,6 +18,10 @@ app.use("/users", usersRouter);
 const permissionsRouter = require("./routes/permissions");
 app.use("/permissions", permissionsRouter);
 
+// scores router 
+const scoresRouter = require("./routes/scores");
+app.use("/scores", scoresRouter);
+
 app.listen(PORT, () => {
     console.log(`server is listening at localhost://${PORT}`);
 });
