@@ -1,5 +1,6 @@
 const pool = require("../models/db");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const register = async (req, res) => {
   const { username, email, password, role_id } = req.body;
@@ -21,6 +22,53 @@ const register = async (req, res) => {
         success: false,
         message: "The email already exists",
         error: err.message,
+      });
+    });
+};
+
+const login = (req, res) => {
+  const {email, password} = req.body;
+  const query = `SELECT * FROM users WHERE email = (?);`;
+  const data = [email.toLowerCase()];
+  pool
+    .query(query, data)
+    .then((result) => {
+      if (result[0].length) {
+        bcrypt.compare(password, result[0][0].password, (err, response) => {
+          if (err) res.json(err.message);
+          if (response) {
+            const payload = {
+              userId: result[0][0].id,
+              role: result[0][0].role_id
+            };
+            const secret = process.env.SECRET;
+            const options = { expiresIn: "12h" };
+            const token = jwt.sign(payload, secret, options);
+            if (token) {
+              return res.status(200).json({
+                token,
+                success: true,
+                message: `Login success`,
+                userId: result[0][0].id,
+                roleId: result[0][0].role_id
+              });
+            } else {
+              throw Error;
+            }
+          } else {
+            res.status(403).json({
+              success: false,
+              message: `The email doesn't exist or the password you've entered is incorrect`
+            });
+          }
+        });
+      } else throw Error;
+    })
+    .catch((err) => {
+      res.status(404).json({
+        success: false,
+        message: "The email doesn't exist",
+        error: err.message
       });
     });
 };
@@ -109,6 +157,7 @@ const reinstateUserById = (req, res) => {
 
 module.exports = {
   register,
+  login,
   getUsers,
   deleteUserById,
   viewDeletedUsers,
