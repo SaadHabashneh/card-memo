@@ -6,6 +6,8 @@ import LandingPage from './LandingPage';
 import GamePage from './GamePage';
 import Register from './Register';
 import Login from './Login';
+import AllScores from './AllScores';
+import MyScores from './MyScores';
 import { AppContext } from "./Context";
 
 
@@ -22,6 +24,7 @@ const App = () => {
         <Route path='/Register' element={Register}></Route>
         <Route path='/Login' element={Login}></Route>
         <Route path='/AllScores' element={AllScores}></Route>
+        <Route path='/MyScores' element={MyScores}></Route>
       </Routes>
       </AppContext.Provider>
     </div>
