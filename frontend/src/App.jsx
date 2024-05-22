@@ -19,12 +19,12 @@ const App = () => {
       <AppContext.Provider value={{token, setToken}}>
       <NavBar />
       <Routes>
-        <Route path='/' element={LandingPage}></Route>
-        <Route path='/Game' element={GamePage}></Route>
-        <Route path='/Register' element={Register}></Route>
-        <Route path='/Login' element={Login}></Route>
-        <Route path='/AllScores' element={AllScores}></Route>
-        <Route path='/MyScores' element={MyScores}></Route>
+        <Route path='/' element={<LandingPage />}></Route>
+        <Route path='/Game' element={<GamePage />}></Route>
+        <Route path='/Register' element={<Register />}></Route>
+        <Route path='/Login' element={<Login />}></Route>
+        <Route path='/AllScores' element={<AllScores />}></Route>
+        <Route path='/MyScores' element={<MyScores />}></Route>
       </Routes>
       </AppContext.Provider>
     </div>

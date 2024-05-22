@@ -8,8 +8,10 @@ const LandingPage = () => {
 
   return (
     <div className="landing">
-        <Typography className="welcome" variant="h1" component="h2">Press start game to play!</Typography>
-        <Button className="start" onClick={() => navigate("/Game")}>Start Game</Button>
+      <div className="landingDiv">
+          <Typography className="welcome" variant="h2">Press start game to play!</Typography>
+          <Button color="inherit" className="start" style={{padding: "5%", marginLeft: "36.25%"}} onClick={() => navigate("/Game")}>Start Game</Button>
+      </div>
     </div>
   )
 };

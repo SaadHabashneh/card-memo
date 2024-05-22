@@ -139,10 +139,42 @@ body {
 
 /* LandingPage */
 
+.landing {
+  display: flex;
+  justify-content: center;
+}
 
+.landingDiv {
+  margin-top: 10%;
+  border-radius: 1%;
+  animation: bg-color 3s ease-out infinite;
+}
+
+@keyframes bg-color {
+  0% {background-color: rgb(241, 8, 8)};
+  25% {background-color: rgb(202, 8, 8)};
+  50% {background-color: rgb(123, 6, 6)};
+  75% {background-color: rgb(93, 2, 2)};
+  100% {background-color: rgba(0, 0, 0, 0.4)};
+}
+
+.start:hover {
+  color: gold;
+}
 
 /* Register */
 
 
 
 /* Login */
+
+
+
+/* All Scores */
+
+
+
+/* My Scores */
+
+
+
