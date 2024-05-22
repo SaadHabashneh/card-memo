@@ -10,7 +10,7 @@ const LandingPage = () => {
     <div className="landing">
       <div className="landingDiv">
           <Typography className="welcome" variant="h2">Press start game to play!</Typography>
-          <Button color="inherit" className="start" style={{padding: "5%", marginLeft: "36.25%"}} onClick={() => navigate("/Game")}>Start Game</Button>
+          <Button className="start" color="secondary" style={{padding: "5%", marginLeft: "36.25%"}} onClick={() => navigate("/Game")}>Start Game</Button>
       </div>
     </div>
   )

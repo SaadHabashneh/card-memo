@@ -158,13 +158,24 @@ body {
   100% {background-color: rgba(0, 0, 0, 0.4)};
 }
 
+.start {
+  color: gold !important
+}
+
 .start:hover {
-  color: gold;
+  color: white !important;
+  background-color: gold !important;
 }
 
 /* Register */
 
+.MuiOutlinedInput-notchedOutline {
+  border-color: rgb(93, 2, 2) !important;
+}
 
+.MuiFormLabel-root {
+  color: white !important;
+}
 
 /* Login */
 
