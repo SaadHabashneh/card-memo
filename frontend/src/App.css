@@ -167,7 +167,7 @@ body {
   background-color: gold !important;
 }
 
-/* Register */
+/* Register & Login */
 
 .MuiOutlinedInput-notchedOutline {
   border-color: rgb(93, 2, 2) !important;
@@ -176,10 +176,6 @@ body {
 .MuiFormLabel-root {
   color: white !important;
 }
-
-/* Login */
-
-
 
 /* All Scores */
 
