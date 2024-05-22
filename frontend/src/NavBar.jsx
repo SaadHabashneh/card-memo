@@ -8,10 +8,12 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 const NavBar = () => {
   const { token } = useContext(AppContext);
   const { setToken } = useContext(AppContext);
+  const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
 
   const logOut = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     setToken(null);
     navigate("/");
   };
@@ -35,7 +37,7 @@ const NavBar = () => {
           <Button
             className="navBtn"
             color="inherit"
-            onClick={() => navigate("/AllScores")}
+            onClick={() => navigate("/allScores")}
           >
             All Scores
           </Button>
@@ -44,7 +46,7 @@ const NavBar = () => {
               <Button
                 className="navBtn"
                 color="inherit"
-                onClick={() => navigate()}
+                onClick={() => navigate(`scores/${userId}`)}
               >
                 My Scores
               </Button>
@@ -57,14 +59,14 @@ const NavBar = () => {
               <Button
                 className="navBtn"
                 color="inherit"
-                onClick={() => navigate("/Register")}
+                onClick={() => navigate("register")}
               >
                 Register
               </Button>
               <Button
                 className="navBtn"
                 color="inherit"
-                onClick={() => navigate("/Login")}
+                onClick={() => navigate("login")}
               >
                 Login
               </Button>
