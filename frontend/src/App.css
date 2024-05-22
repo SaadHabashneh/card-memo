@@ -128,7 +128,14 @@ body {
 
 /* NavBar */
 
+.navbar {
+  background-color: rgb(93, 2, 2);
+  justify-content: space-between;
+}
 
+.navBtn:hover {
+  color: crimson;
+}
 
 /* LandingPage */
 
