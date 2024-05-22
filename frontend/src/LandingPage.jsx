@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Typography, Button } from "@mui/material";
 import "./App.css";
 
 const LandingPage = () => {
@@ -7,8 +8,8 @@ const LandingPage = () => {
 
   return (
     <div className="landing">
-        <h2 className="welcome">Press start game to play!</h2>
-        <Link className="start" to={"/game"}>Start Game</Link>
+        <Typography className="welcome" variant="h1" component="h2">Press start game to play!</Typography>
+        <Button className="start" onClick={() => navigate("/Game")}>Start Game</Button>
     </div>
   )
 };

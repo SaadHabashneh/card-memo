@@ -21,6 +21,7 @@ const App = () => {
         <Route path='/Game' element={GamePage}></Route>
         <Route path='/Register' element={Register}></Route>
         <Route path='/Login' element={Login}></Route>
+        <Route path='/AllScores' element={AllScores}></Route>
       </Routes>
       </AppContext.Provider>
     </div>
