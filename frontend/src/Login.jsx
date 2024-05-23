@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "./Context";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
@@ -27,7 +27,7 @@ const Login = () => {
         setMessage({ data: response.data.message, status: "success" });
         setToken(response.data.token);
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("role", response.data.role);
+        localStorage.setItem("roleId", response.data.roleId);
         localStorage.setItem("userId", response.data.userId);
         setTimeout(() => {
           navigate("/");
@@ -82,7 +82,8 @@ const Login = () => {
             onClick={login}
           >
             Login
-          </Button>
+          </Button><br/>
+          <p className="formMsg">Don't have an account ? <Link to="/register">Register</Link></p>
         </CardContent>
       </Card>
     </Box>

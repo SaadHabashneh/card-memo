@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import {AppContext} from "./Context";
+import axios from "axios";
 import "./App.css";
 import apple from "../public/apple.jpeg";
 import grape from "../public/grape.png";
@@ -25,6 +27,8 @@ const Modal = ({ message, onRestart }) => {
     <div className="modal">
       <div className="modal-content">
         <h2>{message}</h2>
+        <h3>Your score: {hearts}</h3>
+        {servMessage && (<h4>{servMessage.data}</h4>)}
         <button onClick={onRestart}>Restart</button>
       </div>
     </div>
@@ -32,12 +36,17 @@ const Modal = ({ message, onRestart }) => {
 };
 
 const GamePage = () => {
+
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
   const [canFlip, setCanFlip] = useState(true);
   const [score, setScore] = useState(0);
   const [hearts, setHearts] = useState(10);
   const [showModal, setShowModal] = useState(false);
+  const [servMessage, setServMessage] = useState(null);
+
+  const {token} = useContext(AppContext);
+  const userId = localStorage.getItem("userId");
 
   const restartGame = () => {
     setScore(0);
@@ -86,6 +95,16 @@ const GamePage = () => {
 
   useEffect(() => {
     if (score === cardImages.length) {
+      const userScore = {score: hearts, user_id: userId};
+      axios.post("http://localhost:5000/scores", userScore, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      }).then((response) => {
+        setServMessage({data: response.data.message, status: "success"});
+      }).catch((err) => {
+        setServMessage({ data: err.response.data.message, status: "error" });
+      });
       setShowModal(true);
     }
   }, [score]);

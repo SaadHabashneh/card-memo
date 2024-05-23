@@ -105,7 +105,7 @@ body {
   width: 80%;
 }
 
-.modal-content h2 {
+.modal-content h2, .modal-content h3, .modal-content h4 {
   text-align: center;
   color: #1b1523;
 }
@@ -177,7 +177,19 @@ body {
   color: white !important;
 }
 
+.formMsg {
+  color: white;
+}
+
 /* All Scores */
+
+.scoresDiv {
+  display: flex;
+  justify-content: center;
+  height: 80vh;
+  width: 100%;
+  margin-top: 2%;
+}
 
 
 

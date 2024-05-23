@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -117,7 +117,8 @@ const Register = () => {
             onClick={register}
           >
             Register
-          </Button>
+          </Button><br/>
+          <p className="formMsg">Already have an account ? <Link to="/login">Login</Link></p>
         </CardContent>
       </Card>
     </Box>
