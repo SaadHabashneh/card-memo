@@ -33,7 +33,7 @@ const Register = () => {
       role,
     };
     axios
-      .post("http://localhost:5000/users", user)
+      .post(`${import.meta.env.VITE_URL}/users`, user)
       .then((response) => {
         setMessage({ data: response.data.message, status: "success" });
         setTimeout(() => {

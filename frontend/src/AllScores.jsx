@@ -4,19 +4,18 @@ import "./App.css";
 
 const AllScores = () => {
   const [scores, setScores] = useState([]);
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/scores")
+      .get(`${import.meta.env.VITE_URL}/scores`)
       .then((response) => {
-        setScores({ data: response.data.scores, status: "success" });
-        console.log(response.data.scores);
+        setScores(response.data.scores);
       })
       .catch((err) => {
-        setMessage({ data: err.response.data.message, status: "error" });
+        setMessage(err.response.data.message);
       });
-  }, [scores, message]);
+  }, []);
 
   return (
     <>
@@ -33,15 +32,14 @@ const AllScores = () => {
               scores.map((score) => {
                 return (
                   <tr key={score.id}>
-                    <td>{score.data.username}</td>
-                    <td>{score.data.score}</td>
+                    <td>{score.username}</td>
+                    <td>{score.score}</td>
                   </tr>
                 );
               })
             ) : (
               <tr>
-                <td>Error</td>
-                <td>{message.data}</td>
+                <td>{message}</td>
               </tr>
             )}
           </tbody>

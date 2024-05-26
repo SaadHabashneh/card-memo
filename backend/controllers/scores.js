@@ -23,7 +23,7 @@ const addScore = (req, res) => {
 };
 
 const getAllScores = (req, res) => {
-  const query = `SELECT (username), (score) FROM users JOIN scores WHERE users.id = scores.user_id ORDER BY DESC;`;
+  const query = `SELECT users.username, scores.id, scores.score  FROM users JOIN scores ON users.id = scores.user_id ORDER BY scores.score DESC;`;
   pool
     .query(query)
     .then((result) => {
@@ -44,7 +44,7 @@ const getAllScores = (req, res) => {
 
 const getUserScores = (req, res) => {
   const { id } = req.params;
-  const query = `SELECT * FROM scores WHERE user_id = (?) ORDER BY DESC;`;
+  const query = `SELECT * FROM scores WHERE user_id = (?) ORDER BY score DESC;`;
   const data = [id];
   pool
     .query(query, data)
