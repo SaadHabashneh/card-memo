@@ -183,13 +183,6 @@ body {
 
 /* All Scores */
 
-.scoresDiv {
-  display: flex;
-  justify-content: center;
-  height: 80vh;
-  width: 100%;
-  margin-top: 2%;
-}
 
 
 

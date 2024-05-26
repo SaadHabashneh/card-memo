@@ -2,6 +2,18 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { AppContext } from "./Context";
+import {
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Typography,
+  Button,
+} from "@mui/material";
 import "./App.css";
 
 const MyScores = () => {
@@ -23,35 +35,76 @@ const MyScores = () => {
       .catch((err) => {
         setMessage(err.response.data.message);
       });
-  }, [token, userId]);
+  }, [token, userId, scores]);
+
+  const deleteScore = (id) => {
+    axios
+      .delete(`${import.meta.env.VITE_URL}/scores/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setMessage(response.data.message);
+      })
+      .catch((err) => {
+        setMessage(err.response.data.message);
+      });
+  };
 
   return (
-    <>
-      <div className="scoresDiv">
-        <table className="scoresTable">
-          <thead>
-            <tr>
-              <th>Your Scores</th>
-            </tr>
-          </thead>
-          <tbody>
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="stretch"
+      height="80vh"
+    >
+      <TableContainer
+        component={Paper}
+        style={{
+          backgroundColor: "#1B1212",
+          border: "1px solid rgb(93, 2, 2)",
+        }}
+      >
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell style={{ color: "white" }} align="center">
+                Your Scores
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {scores ? (
-              scores.map((score) => {
-                return (
-                  <tr key={score.id}>
-                    <td>{score.score}</td>
-                  </tr>
-                );
-              })
+              scores.map((score) => (
+                <TableRow key={score.id}>
+                  <TableCell align="center" style={{ color: "white" }}>
+                    {score.score}
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      style={{
+                        backgroundColor: "rgb(93, 2, 2)",
+                        float: "right",
+                      }}
+                      onClick={() => deleteScore(score.id)}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))
             ) : (
-              <tr>
-                <td>{message}</td>
-              </tr>
+              <TableRow>
+                <TableCell>
+                  <Typography color="error">{message}</Typography>
+                </TableCell>
+              </TableRow>
             )}
-          </tbody>
-        </table>
-      </div>
-    </>
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 };
 

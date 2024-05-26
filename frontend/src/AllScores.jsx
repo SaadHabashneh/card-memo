@@ -1,5 +1,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import {
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Typography,
+} from "@mui/material";
 import "./App.css";
 
 const AllScores = () => {
@@ -18,34 +29,41 @@ const AllScores = () => {
   }, []);
 
   return (
-    <>
-      <div className="scoresDiv">
-        <table className="scoresTable">
-          <thead>
-            <tr>
-              <th>Players</th>
-              <th>Scores</th>
-            </tr>
-          </thead>
-          <tbody>
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="stretch"
+      height="80vh"
+    >
+      <TableContainer component={Paper} style={{ backgroundColor: "#1B1212", border: "1px solid rgb(93, 2, 2)" }}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell style={{ color: "white" }}>Players</TableCell>
+              <TableCell style={{ color: "white" }} align="right">Scores</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {scores ? (
-              scores.map((score) => {
-                return (
-                  <tr key={score.id}>
-                    <td>{score.username}</td>
-                    <td>{score.score}</td>
-                  </tr>
-                );
-              })
+              scores.map((score) => (
+                <TableRow key={score.id}>
+                  <TableCell component="th" scope="row" style={{ color: "white" }}>
+                    {score.username}
+                  </TableCell>
+                  <TableCell align="right" style={{ color: "white" }}>{score.score}</TableCell>
+                </TableRow>
+              ))
             ) : (
-              <tr>
-                <td>{message}</td>
-              </tr>
+              <TableRow>
+                <TableCell>
+                  <Typography color="error">{message}</Typography>
+                </TableCell>
+              </TableRow>
             )}
-          </tbody>
-        </table>
-      </div>
-    </>
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 };
 
