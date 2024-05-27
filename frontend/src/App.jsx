@@ -8,6 +8,7 @@ import Register from './Register';
 import Login from './Login';
 import AllScores from './AllScores';
 import MyScores from './MyScores';
+import AdminPanel from './AdminPanel';
 import { AppContext } from "./Context";
 
 
@@ -25,6 +26,7 @@ const App = () => {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/allScores' element={<AllScores />}></Route>
         <Route path='/scores/:userId' element={<MyScores />}></Route>
+        <Route path='/admin' element={<AdminPanel />}></Route>
       </Routes>
       </AppContext.Provider>
     </div>

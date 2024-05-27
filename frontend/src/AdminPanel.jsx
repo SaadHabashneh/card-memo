@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { AppContext } from "./Context";
 import "./App.css";
 import {
@@ -16,30 +16,29 @@ import {
   Button,
 } from "@mui/material";
 
-const MyScores = () => {
-  const [scores, setScores] = useState([]);
-  const [message, setMessage] = useState("");
+const AdminPanel = () => {
   const { token } = useContext(AppContext);
-  const { userId } = useParams();
+  const [users, setUsers] = useState([]);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_URL}/scores/${userId}`, {
+      .get(`${import.meta.env.VITE_URL}/users`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        setScores(response.data.scores);
+        setUsers(response.data.users);
       })
       .catch((err) => {
         setMessage(err.response.data.message);
       });
-  }, [token, userId, scores]);
+  }, [token]);
 
-  const deleteScore = (id) => {
+  const deleteUser = (id) => {
     axios
-      .delete(`${import.meta.env.VITE_URL}/scores/${id}`, {
+      .put(`${import.meta.env.VITE_URL}/users/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -69,29 +68,27 @@ const MyScores = () => {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell style={{ color: "white" }}>
-                Your Scores
-              </TableCell>
+              <TableCell style={{ color: "white" }}>Players</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {scores ? (
-              scores.map((score) => (
-                <TableRow key={score.id}>
-                    <TableCell align="center" style={{ color: "white" }}>
-                      {score.score}
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        style={{
-                          backgroundColor: "rgb(93, 2, 2)",
-                          marginLeft: "90%"
-                        }}
-                        onClick={() => deleteScore(score.id)}
-                      >
-                        Delete
-                      </Button>
-                    </TableCell>
+            {users ? (
+              users.map((user) => (
+                <TableRow key={user.id}>
+                  <TableCell align="center" style={{ color: "white" }}>
+                    {user.username}
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      style={{
+                        backgroundColor: "rgb(93, 2, 2)",
+                        marginLeft: "90%",
+                      }}
+                      onClick={() => deleteUser(user.id)}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))
             ) : (
@@ -108,4 +105,4 @@ const MyScores = () => {
   );
 };
 
-export default MyScores;
+export default AdminPanel;
