@@ -69,7 +69,7 @@ const MyScores = () => {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell style={{ color: "white" }} align="center">
+              <TableCell style={{ color: "white" }}>
                 Your Scores
               </TableCell>
             </TableRow>
@@ -78,20 +78,20 @@ const MyScores = () => {
             {scores ? (
               scores.map((score) => (
                 <TableRow key={score.id}>
-                  <TableCell align="center" style={{ color: "white" }}>
-                    {score.score}
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      style={{
-                        backgroundColor: "rgb(93, 2, 2)",
-                        float: "right",
-                      }}
-                      onClick={() => deleteScore(score.id)}
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
+                    <TableCell align="center" style={{ color: "white" }}>
+                      {score.score}
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        style={{
+                          backgroundColor: "rgb(93, 2, 2)",
+                          marginLeft: "90%"
+                        }}
+                        onClick={() => deleteScore(score.id)}
+                      >
+                        Delete
+                      </Button>
+                    </TableCell>
                 </TableRow>
               ))
             ) : (
